@@ -81,11 +81,20 @@ The `supervisord.conf` file configures Supervisor to manage multiple services (A
 
 ## Symfony
 
-1. Edit Apache configuration to work smoothly with Symfony
+1. Run bash
+    ```bash
+	docker ps
+	docker exec -it <container_id> /bin/bash
+    ```
+2. create public folder
+    ```bash
+	mkdir /var/www/html/public
+	```
+3. Edit Apache configuration to work smoothly with Symfony
     ```bash
     nano /etc/apache2/sites-available/000-default.conf
     ```
-2. Enter this:
+4. Enter this:
     ```bash
     <VirtualHost *:80>
         ServerAdmin webmaster@localhost
@@ -99,17 +108,17 @@ The `supervisord.conf` file configures Supervisor to manage multiple services (A
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 	</VirtualHost>
 	```
-3. Restart Apache
+5. Restart Apache
     ```bash
     service apache2 restart
     ```
-4. Install Symfony with Profiler
+6. Install Symfony with Profiler
     ```bash
 	composer create-project symfony/skeleton my_project_name
 	cd my_project_name
 	composer require --dev symfony/web-profiler-bundle
     ```
-5. Open in browser\
+7. Open in browser\
 	[http://127.0.0.1:8080/](http://127.0.0.1:8080/)
 
 ## Why Use Batch Files?
