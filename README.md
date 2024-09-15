@@ -40,8 +40,8 @@ This project provides a complete development environment with Apache, MariaDB, a
     .\start-container.bat
     ```
 2. Access the local server in your browser:
-    - Apache: [http://localhost:8080]
-    - MailHog: [http://localhost:8025]
+    - Apache: [http://localhost:8080](http://localhost:8080)
+    - MailHog: [http://localhost:8025](http://localhost:8025)
 	
 3. Run bash
     ```bash
