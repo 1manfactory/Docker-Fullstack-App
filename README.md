@@ -42,6 +42,12 @@ This project provides a complete development environment with Apache, MariaDB, a
 2. Access the local server in your browser:
     - Apache: `http://localhost:8080`
     - MailHog: `http://localhost:8025`
+	
+3. Run bash
+    ```bash
+	docker ps
+	docker exec -it <container_id> /bin/bash
+	```
 
 ## Directory Structure
 
