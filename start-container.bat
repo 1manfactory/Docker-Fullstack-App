@@ -7,7 +7,7 @@ echo ""
 echo Container is up and running
 echo phpinfo: http://127.0.0.1:8080/
 echo MailHog: http://127.0.0.1:8025/
-echo docker exec -it "<container_id>" /bin/bash
+echo docker exec -it \<container_id\> /bin/bash
 echo ""
 echo Press any key to exit...
 pause >nul	
