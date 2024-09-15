@@ -86,10 +86,13 @@ The `supervisord.conf` file configures Supervisor to manage multiple services (A
 	docker ps
 	docker exec -it <container_id> /bin/bash
     ```
-2. create public folder
+2. Install Symfony with Profiler
     ```bash
-	mkdir /var/www/html/public
-	```
+	cd /var/www/html
+	composer create-project symfony/skeleton my_project_name
+	cd my_project_name
+	composer require --dev symfony/web-profiler-bundle
+    ```	
 3. Edit Apache configuration to work smoothly with Symfony
     ```bash
     nano /etc/apache2/sites-available/000-default.conf
@@ -98,9 +101,9 @@ The `supervisord.conf` file configures Supervisor to manage multiple services (A
     ```bash
     <VirtualHost *:80>
         ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/html/public
+        DocumentRoot /var/www/html/my_project_name/public
 
-        <Directory /var/www/html/public>
+        <Directory /var/www/html/my_project_name/public>
             AllowOverride All
         </Directory>
 
@@ -112,13 +115,19 @@ The `supervisord.conf` file configures Supervisor to manage multiple services (A
     ```bash
     service apache2 restart
     ```
-6. Install Symfony with Profiler
-    ```bash
-	composer create-project symfony/skeleton my_project_name
-	cd my_project_name
-	composer require --dev symfony/web-profiler-bundle
-    ```
-7. Open in browser\
+6. Edit/Create .htaccess
+	```bash
+	nano /var/www/html/my_project_name/public/.htaccess
+	```
+7. Enter this:
+	```bash
+	<IfModule mod_rewrite.c>
+		RewriteEngine On
+		RewriteCond %{REQUEST_FILENAME} !-f
+		RewriteRule ^(.*)$ index.php [QSA,L]
+	</IfModule>
+	```
+8. Open in browser\
 	[http://127.0.0.1:8080/](http://127.0.0.1:8080/)
 
 ## Why Use Batch Files?
