@@ -1,7 +1,7 @@
 @echo off
 docker info >nul 2>&1
 if %ERRORLEVEL% neq 0 (
-    echo Docker Desktop is not running. Please start Docker Desktop.
+	echo -e "\e[31mDocker Desktop is not running. Please start Docker Desktop.\e[0m"
     echo Press any key to exit...
     pause >nul
     exit /b 1
