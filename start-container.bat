@@ -6,6 +6,6 @@ docker ps
 echo Container is up and running
 echo phpinfo: http://127.0.0.1:8080/
 echo MailHog: http://127.0.0.1:8025/
-echo BASH: docker exec -it <container_id> /bin/bash
+echo "BASH: docker exec -it <container_id> /bin/bash"
 echo Press any key to exit...
 pause >nul	
