@@ -22,11 +22,11 @@ This project provides a complete development environment with Apache, MariaDB, a
 
 1. Clone this repository:
     ```bash
-    git clone https://github.com/your-username/docker-fullstack-app.git
+    git clone https://github.com/1manfactory/Docker-Fullstack-App new-project
     ```
 2. Navigate to the project directory:
     ```bash
-    cd docker-fullstack-app
+    cd new-project
     ```
 3. Run the `build-container.bat` script to build the Docker container:
     ```bash
