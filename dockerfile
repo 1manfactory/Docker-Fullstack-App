@@ -79,5 +79,9 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # open ports Apache (80), MariaDB (3306), MailHog Web UI (8025) and MailHog SMTP (1025)
 EXPOSE 80 3306 8025 1025
 
+# activate module rewrite for Apache
+RUN a2enmod rewrite
+RUN service apache2 restart
+
 # run Supervisor
 CMD ["/usr/bin/supervisord"]

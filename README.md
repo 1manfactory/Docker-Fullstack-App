@@ -10,6 +10,8 @@ This project provides a complete development environment with Apache, MariaDB, a
 - [Directory Structure](#directory-structure)
 - [Configuration Explanation](#configuration-explanation)
 - [Advantages over XAMPP](#advantages-over-xampp)
+- [Symfony](#symfony)
+- [Why Use Batch Files?](#why-use-batch-files)
 
 ## Requirements
 
@@ -70,6 +72,41 @@ The `supervisord.conf` file configures Supervisor to manage multiple services (A
 - **Ease of Use:** Simplified setup and deployment process, with everything configured via the Dockerfile and initialization scripts.
 - **Consistent Environment:** Provides a consistent development environment, avoiding the "it works on my machine" problem.
 - **Dynamic Mounting:** Changes made in the local `./src` directory are immediately reflected in the container's `/var/www/html` directory.
+
+## Symfony
+
+1. Edit Apache configuration to work smoothly with Symfony
+    ```bash
+    nano /etc/apache2/sites-available/000-default.conf
+    ```
+2. Enter this:
+    ```bash
+    <VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html/public
+
+        <Directory /var/www/html/public>
+            AllowOverride All
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+	</VirtualHost>
+	```
+3. Restart Apache
+    ```bash
+    service apache2 restart
+    ```
+4. Install Symfony with Profiler
+    ```bash
+	composer create-project symfony/skeleton my_project_name
+	cd my_project_name
+	composer require --dev symfony/web-profiler-bundle
+    ```
+5. Open in browser
+	```bash
+	http://127.0.0.1:8080/
+	```
 
 ## Why Use Batch Files?
 
