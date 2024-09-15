@@ -103,7 +103,7 @@ The `supervisord.conf` file configures Supervisor to manage multiple services (A
 	cd my_project_name
 	composer require --dev symfony/web-profiler-bundle
     ```
-5. Open in browser
+5. Open in browser\
 	[http://127.0.0.1:8080/](http://127.0.0.1:8080/)
 
 ## Why Use Batch Files?
