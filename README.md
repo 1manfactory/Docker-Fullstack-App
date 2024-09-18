@@ -10,6 +10,7 @@ This project provides a complete development environment with Apache, MariaDB, a
 - [Directory Structure](#directory-structure)
 - [Configuration Explanation](#configuration-explanation)
 - [Advantages over XAMPP](#advantages-over-xampp)
+- [Using Volumes](#using-volumes)
 - [Symfony](#symfony)
 - [Why Use Batch Files?](#why-use-batch-files)
 
@@ -78,6 +79,26 @@ The `supervisord.conf` file configures Supervisor to manage multiple services (A
 - **Ease of Use:** Simplified setup and deployment process, with everything configured via the Dockerfile and initialization scripts.
 - **Consistent Environment:** Provides a consistent development environment, avoiding the "it works on my machine" problem.
 - **Dynamic Mounting:** Changes made in the local `./src` directory are immediately reflected in the container's `/var/www/html` directory.
+
+## Using Volumes
+
+Volumes in Docker are used to persist data, ensuring it isn't lost when a container is restarted or removed. In this project, there are two main benefits of using volumes:
+
+1. **Data Persistence**: By using a volume for MariaDB (`my_data_volume`), all databases and data are preserved even if the container is stopped or restarted. This prevents data loss.
+
+2. **Code Synchronization**: A volume is used to synchronize the local `src` folder with the `/var/www/html` directory inside the container. This means that changes made to the source files on the host system are immediately reflected in the container, speeding up development and testing.
+
+The setup of these volumes is handled through the `start-container.bat` script, which runs the following commands:
+
+```batch
+docker volume create my_data_volume
+docker run -d -p 8080:80 -p 3306:3306 -p 8025:8025 -p 1025:1025 -v "%CURRENT_DIR%/src:/var/www/html" -v my_data_volume:/var/lib/mysql my-fullstack-app
+```
+
+This script creates a Docker volume named `my_data_volume` and starts the container with the necessary volume mounts. This setup ensures that:
+
+- Your source code in the `src` directory is linked to the container's web root.
+- The MariaDB data is stored in `my_data_volume`, ensuring data persistence between container restarts.
 
 ## Symfony
 
